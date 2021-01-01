@@ -3,7 +3,12 @@
     <ion-title>sobre</ion-title>
   </ion-toolbar>
 </ion-header>
- 
+<div class="ion-padding">
+  <ion-label position="stacked" color="primary">
+    <ion-icon name="information-circle-outline"></ion-icon>
+    </ion-label>
+  <ion-textarea name="messageField" rows="4" [(ngModel)]="messageField"></ion-textarea>
+</div>
 <ion-content>
   <h1>Pagina Sobre</h1>
   Aplicação desenvolvida para o TCC II de Michael Angelo Alves da Silva <br>

@@ -14,8 +14,8 @@ export class AppComponent implements OnInit {
   public appPages = [
     {
       title: 'Mapa',
-      url: '/src/app/mapa/mapa.page.html',
-      icon: 'mapa'
+      url: '/mapa',
+      icon: 'map-outline'
     },
     {
       title: 'Inbox',
@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
     {
       title: 'Sobre',
       url: '/sobre',
-      icon: 'about'
+      icon: 'information-circle-outline'
     }
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
