@@ -22,6 +22,7 @@
 - npm install cordova-plugin-geolocation
 - npm install @ionic-native/geolocation
 - ionic cap sync
+# Caso de erro ao tentar executar o cap sync verificar se não falta alguma dependencia.
 
 # Videos para auxiliar 
  - https://www.youtube.com/watch?v=gTl2UuJdJ7A
