@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+//import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ToastController } from '@ionic/angular';
+import { Api } from 'src/services/api';
 
 @Component({
   selector: 'app-folder',
@@ -22,11 +23,15 @@ export class FolderPage implements OnInit {
     private geolocation: Geolocation,
     private actRuter: ActivatedRoute,
     public toastCtrl: ToastController,
-    private httpClient: HttpClient,
-    //private provider: Api
+   // private httpClient: HttpClient,
+    private provider: Api
     ) { }
 
   ngOnInit() {
+    
+      this.actRuter.params.subscribe((data:any) =>{
+
+      });
   }
   ionViewWillEnter() {
     this.exibirMapa();
@@ -75,6 +80,30 @@ export class FolderPage implements OnInit {
   }
 
 
+  // Salvando a posição no BD
   salvar(){
+    return new Promise(resolve => {
+      let dados = {
+        latitude: this.latitude,
+        longitude: this.longitude
+      }
+      this.provider.dadosApi(dados, 'localizacao/inserir.php').subscribe(
+        data => {
+          this.router.navigate(['folder'])
+        }
+      )
+      this.mensagemSucesso();
+    })
+    
   }
+
+  // Apresentando uma mensagem de sucesso ao salvar no banco
+  async mensagemSucesso(){
+    const toast = await this.toastCtrl.create({
+      message: 'Sucesso',
+      duration: 2000
+    });
+    toast.present();
+  }
+
 }
