@@ -43,11 +43,8 @@ export class FolderPage implements OnInit {
       center: posicao,
       zoom: 8,
       disableDefaultUI: true
-
     };
-    console.log('ExibirMapa');
     this.map = new google.maps.Map(this.mapRef.nativeElement, opcao);
-
     this.buscarPosicao();
   }
 
@@ -58,13 +55,11 @@ export class FolderPage implements OnInit {
       this.longitude = resp.coords.longitude
 
       this.minhaPosicao = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
-
       this.irParaMinhaPosicao();
 
     }).catch((error) => {
       console.log('Error getting location', error);
     });
-    console.log('BuscarPosicao');
   }
 
   // Mostrando a localização no mapa
@@ -78,28 +73,22 @@ export class FolderPage implements OnInit {
       animation: google.maps.Animation.BOUNCE,
       map: this.map
     });
-    console.log('IrParaMinhaPosicao');
   }
 
 
   // Salvando a posição no BD
   salvar(){
-    console.log('Salvar');
     return new Promise(resolve => {
       let dados = {
         latitude: this.latitude,
         longitude: this.longitude
       }
-      console.log('Antes de Salvar');
+
       this.provider.dadosApi(dados, 'localizacao/inserir.php').subscribe(
         data => {
-          console.log(data['mensagem']);
           this.mensagemSucesso(data['mensagem']);
-          //this.router.navigate(['folder']);
         }
       );
-     // this.mensagemSucesso();
-      console.log('Eu cheguei aqui');
     });
   }
 
