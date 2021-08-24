@@ -1,4 +1,4 @@
-//import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -23,12 +23,11 @@ export class FolderPage implements OnInit {
     private geolocation: Geolocation,
     private actRuter: ActivatedRoute,
     public toastCtrl: ToastController,
-   // private httpClient: HttpClient,
+    private httpClient: HttpClient,
     private provider: Api
     ) { }
 
   ngOnInit() {
-    
       this.actRuter.params.subscribe((data:any) =>{
 
       });
@@ -44,8 +43,9 @@ export class FolderPage implements OnInit {
       center: posicao,
       zoom: 8,
       disableDefaultUI: true
-    };
 
+    };
+    console.log('ExibirMapa');
     this.map = new google.maps.Map(this.mapRef.nativeElement, opcao);
 
     this.buscarPosicao();
@@ -55,15 +55,16 @@ export class FolderPage implements OnInit {
   buscarPosicao(){
     this.geolocation.getCurrentPosition().then((resp) => {
       this.latitude = resp.coords.latitude;
-      this.longitude = resp.coords.longitude    
+      this.longitude = resp.coords.longitude
 
       this.minhaPosicao = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
 
       this.irParaMinhaPosicao();
-      
-     }).catch((error) => {
-       console.log('Error getting location', error);
-     });
+
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+    console.log('BuscarPosicao');
   }
 
   // Mostrando a localização no mapa
@@ -77,30 +78,35 @@ export class FolderPage implements OnInit {
       animation: google.maps.Animation.BOUNCE,
       map: this.map
     });
+    console.log('IrParaMinhaPosicao');
   }
 
 
   // Salvando a posição no BD
   salvar(){
+    console.log('Salvar');
     return new Promise(resolve => {
       let dados = {
         latitude: this.latitude,
         longitude: this.longitude
       }
+      console.log('Antes de Salvar');
       this.provider.dadosApi(dados, 'localizacao/inserir.php').subscribe(
         data => {
-          this.router.navigate(['folder'])
+          console.log(data['mensagem']);
+          this.mensagemSucesso(data['mensagem']);
+          //this.router.navigate(['folder']);
         }
-      )
-      this.mensagemSucesso();
-    })
-    
+      );
+     // this.mensagemSucesso();
+      console.log('Eu cheguei aqui');
+    });
   }
 
   // Apresentando uma mensagem de sucesso ao salvar no banco
-  async mensagemSucesso(){
+  async mensagemSucesso(mensagem){
     const toast = await this.toastCtrl.create({
-      message: 'Sucesso',
+      message: mensagem,
       duration: 2000
     });
     toast.present();

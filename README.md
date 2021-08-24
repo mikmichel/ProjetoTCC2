@@ -13,7 +13,7 @@
  - Adicionar os types do Google Maps
  - Adicionar os JS do Maps no index.html do projeto e colocar a cahve API
  <script async
-    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY">
 </script>
 # Dependencias 
 - npm i -D @types/google.maps
