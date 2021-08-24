@@ -2,9 +2,9 @@
 
 # Os arquivos da pasta BD devem está localizados na pasta do servidor web referente ao projeto
 
-# no Linux por exemplo: /var/www/html/meuprojeto
+# No Linux por exemplo: /var/www/html/meuprojeto
 
-# no Windows por exemplo: C:\xampp\htdocs\meuprojeto
+# No Windows por exemplo: C:\xampp\htdocs\meuprojeto
 
 # Dependencias do projeto
  - Criar o projeto no https://cloud.google.com/
