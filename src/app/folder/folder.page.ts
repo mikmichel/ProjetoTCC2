@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ToastController } from '@ionic/angular';
 import { Api } from 'src/services/api';
@@ -19,11 +18,9 @@ export class FolderPage implements OnInit {
   @ViewChild('map', { read: ElementRef, static: false }) mapRef: ElementRef;
 
   constructor(
-    private router: Router,
     private geolocation: Geolocation,
     private actRuter: ActivatedRoute,
     public toastCtrl: ToastController,
-    private httpClient: HttpClient,
     private provider: Api
     ) { }
 
@@ -43,8 +40,11 @@ export class FolderPage implements OnInit {
       center: posicao,
       zoom: 8,
       disableDefaultUI: true
+
     };
+    //console.log('ExibirMapa');
     this.map = new google.maps.Map(this.mapRef.nativeElement, opcao);
+
     this.buscarPosicao();
   }
 
@@ -55,11 +55,13 @@ export class FolderPage implements OnInit {
       this.longitude = resp.coords.longitude
 
       this.minhaPosicao = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+
       this.irParaMinhaPosicao();
 
     }).catch((error) => {
       console.log('Error getting location', error);
     });
+    //console.log('BuscarPosicao');
   }
 
   // Mostrando a localização no mapa
@@ -73,22 +75,25 @@ export class FolderPage implements OnInit {
       animation: google.maps.Animation.BOUNCE,
       map: this.map
     });
+   // console.log('IrParaMinhaPosicao');
   }
-
 
   // Salvando a posição no BD
   salvar(){
+   // console.log('Salvar');
     return new Promise(resolve => {
       let dados = {
         latitude: this.latitude,
         longitude: this.longitude
       }
-
+      //console.log('Antes de Salvar');
       this.provider.dadosApi(dados, 'localizacao/inserir.php').subscribe(
         data => {
+          //console.log(data['mensagem']);
           this.mensagemSucesso(data['mensagem']);
         }
       );
+      //console.log('Eu cheguei aqui');
     });
   }
 
@@ -100,5 +105,7 @@ export class FolderPage implements OnInit {
     });
     toast.present();
   }
+  
+  
 
 }

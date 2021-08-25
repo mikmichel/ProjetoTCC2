@@ -13,9 +13,11 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     IonicModule,
     FolderPageRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   declarations: [FolderPage],
-  providers: [Geolocation]
+  providers: [
+    Geolocation,
+  ]
 })
 export class FolderPageModule {}
