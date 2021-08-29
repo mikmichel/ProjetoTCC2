@@ -17,15 +17,9 @@ export class FolderPage implements OnInit {
   minhaPosicao: google.maps.LatLng;
   latitude: any = "";
   longitude: any = "";
-  testeRede: any = "";
-
-  //para testes
-  public hasTracked:boolean = false;
-  public isTracking:boolean = false;
-  //public iterations:number = 1;
-  //public speeds:string[] = [];
-  public speeds: any="";
-  //para testes
+  testeRede: any = ""; 
+  speeds: any="";
+  
 
   @ViewChild('map', { read: ElementRef, static: false }) mapRef: ElementRef;
 
@@ -95,9 +89,7 @@ export class FolderPage implements OnInit {
   //Realizando um teste de rede
   trackSpeed() {
     this.speeds = [];
-
-    this.isTracking = true;
-    this.speedTestService.getMbps({ iterations: 1, retryDelay: 1500 }).subscribe(
+    this.speedTestService.getMbps({ retryDelay: 1500 }).subscribe(
       (speed) => {
         this.speeds.unshift(
           speed.toFixed(2)

@@ -7,7 +7,7 @@
 	$longitude = $postjson['longitude'];
 	$testeRede = $postjson['testeRede'];
 
-	$res = $pdo->prepare("INSERT INTO localizacao SET latitude = :latitude, longitude = :longitude, teste = :testeRede");
+	$res = $pdo->prepare("INSERT INTO localizacao SET latitude = :latitude, longitude = :longitude, testeRede = :testeRede");
 
 //salvaldo a localização no banco.
 	$res->bindValue(":latitude", $latitude);
