@@ -19,7 +19,6 @@ export class FolderPage implements OnInit {
   longitude: any = "";
   testeRede: any = ""; 
   speeds: any="";
-  
 
   @ViewChild('map', { read: ElementRef, static: false }) mapRef: ElementRef;
 
@@ -95,6 +94,7 @@ export class FolderPage implements OnInit {
           speed.toFixed(2)
         );
         this.testeRede = this.speeds;
+
         console.log('Passei por aqui 2 ' + speed); //teste
         console.log('Passei por aqui 3 ' + this.speeds); //reste
 
@@ -104,7 +104,7 @@ export class FolderPage implements OnInit {
 
   // Salvando a posição no BD
   salvar(){
-    console.log('Salvar'); //teste
+    console.log('Salvar()'); //teste
     return new Promise(resolve => {
       let dados = {
         latitude: this.latitude,
@@ -114,6 +114,7 @@ export class FolderPage implements OnInit {
        console.log('Antes de Salvar'); //teste
       this.provider.dadosApi(dados, 'localizacao/inserir.php').subscribe(
         data => {
+          console.log('Salvando'); //teste
            console.log(data['mensagem']); //teste
           this.mensagemSucesso(data['mensagem']);
         }
@@ -130,8 +131,5 @@ export class FolderPage implements OnInit {
     });
     toast.present();
   }
-
-
-
 
 }
