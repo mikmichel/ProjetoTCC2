@@ -96,9 +96,6 @@ export class FolderPage implements OnInit {
   trackSpeed() {
     this.speeds = [];
 
-    
-    console.log('Passei por aqui 1 ' + this.speeds);
-
     this.isTracking = true;
     this.speedTestService.getMbps({ iterations: 1, retryDelay: 1500 }).subscribe(
       (speed) => {
@@ -106,8 +103,8 @@ export class FolderPage implements OnInit {
           speed.toFixed(2)
         );
         this.testeRede = this.speeds;
-        console.log('Passei por aqui 2 ' + speed);
-        console.log('Passei por aqui 3 ' + this.speeds);
+        console.log('Passei por aqui 2 ' + speed); //teste
+        console.log('Passei por aqui 3 ' + this.speeds); //reste
 
       }
     );
