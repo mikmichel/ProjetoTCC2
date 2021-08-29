@@ -12,17 +12,22 @@
   <div #map id="map"></div> 
 
    <!-- Informa na tela a latitude e longitude -->
-  <ion-note><b>Latitude:{{latitude}} </b></ion-note><br />
-  <ion-note><b>Longitude:{{longitude}} </b></ion-note><br />
+  <ion-label>Latitude: <b>{{latitude}} </b></ion-label><br />
+  <ion-label>Longitude: <b>{{longitude}} </b></ion-label><br />
 
   <!-- Teste de ping -->
-  <ion-note><b>Teste de ping: </b></ion-note><br />
+  <ion-label>Teste:<b> {{ speeds[0] }}</b> Mbps</ion-label><br/>
 
+
+  <ion-button color="primary" expand="block" (click)="trackSpeed()">
+    Testar
+  </ion-button>
 
 
   <ion-button color="primary" expand="block" (click)="salvar()">
     Salvar
   </ion-button>
+
 
  
 </ion-content>

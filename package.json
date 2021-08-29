@@ -32,6 +32,7 @@
     "cordova-plugin-geolocation": "^4.1.0",
     "cordova-plugin-network-information": "^3.0.0",
     "cordova-plugin-networkinterface": "^2.0.0",
+    "ng-speed-test": "^2.2.0",
     "rxjs": "~6.6.0",
     "rxjs-compat": "^6.6.7",
     "tslib": "^2.2.0",

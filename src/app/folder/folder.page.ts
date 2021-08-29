@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ToastController } from '@ionic/angular';
 import { Api } from 'src/services/api';
+import {SpeedTestService} from 'ng-speed-test';
+
+
 
 @Component({
   selector: 'app-folder',
@@ -14,6 +17,15 @@ export class FolderPage implements OnInit {
   minhaPosicao: google.maps.LatLng;
   latitude: any = "";
   longitude: any = "";
+  testeRede: any = "";
+
+  //para testes
+  public hasTracked:boolean = false;
+  public isTracking:boolean = false;
+  //public iterations:number = 1;
+  //public speeds:string[] = [];
+  public speeds: any="";
+  //para testes
 
   @ViewChild('map', { read: ElementRef, static: false }) mapRef: ElementRef;
 
@@ -21,7 +33,8 @@ export class FolderPage implements OnInit {
     private geolocation: Geolocation,
     private actRuter: ActivatedRoute,
     public toastCtrl: ToastController,
-    private provider: Api
+    private provider: Api,
+    private speedTestService: SpeedTestService
     ) { }
 
   ngOnInit() {
@@ -31,6 +44,7 @@ export class FolderPage implements OnInit {
   }
   ionViewWillEnter() {
     this.exibirMapa();
+    this.trackSpeed();
   }
 
   // colocando uma posição especifica no mapa.
@@ -52,7 +66,7 @@ export class FolderPage implements OnInit {
   buscarPosicao(){
     this.geolocation.getCurrentPosition().then((resp) => {
       this.latitude = resp.coords.latitude;
-      this.longitude = resp.coords.longitude
+      this.longitude = resp.coords.longitude;
 
       this.minhaPosicao = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
 
@@ -78,22 +92,44 @@ export class FolderPage implements OnInit {
    // console.log('IrParaMinhaPosicao');
   }
 
+  //Realizando um teste de rede
+  trackSpeed() {
+    this.speeds = [];
+
+    
+    console.log('Passei por aqui 1 ' + this.speeds);
+
+    this.isTracking = true;
+    this.speedTestService.getMbps({ iterations: 1, retryDelay: 1500 }).subscribe(
+      (speed) => {
+        this.speeds.unshift(
+          speed.toFixed(2)
+        );
+        this.testeRede = this.speeds;
+        console.log('Passei por aqui 2 ' + speed);
+        console.log('Passei por aqui 3 ' + this.speeds);
+
+      }
+    );
+  }
+
   // Salvando a posição no BD
   salvar(){
-   // console.log('Salvar');
+    console.log('Salvar'); //teste
     return new Promise(resolve => {
       let dados = {
         latitude: this.latitude,
-        longitude: this.longitude
+        longitude: this.longitude,
+        testeRede: this.testeRede
       }
-      //console.log('Antes de Salvar');
+       console.log('Antes de Salvar'); //teste
       this.provider.dadosApi(dados, 'localizacao/inserir.php').subscribe(
         data => {
-          //console.log(data['mensagem']);
+           console.log(data['mensagem']); //teste
           this.mensagemSucesso(data['mensagem']);
         }
       );
-      //console.log('Eu cheguei aqui');
+       console.log('Eu cheguei aqui'); //teste
     });
   }
 
@@ -105,7 +141,8 @@ export class FolderPage implements OnInit {
     });
     toast.present();
   }
-  
-  
+
+
+
 
 }

@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { Api } from 'src/services/api';
+import { SpeedTestModule } from 'ng-speed-test';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,7 +16,9 @@ import { Api } from 'src/services/api';
     HttpClientModule,
     BrowserModule,
     IonicModule.forRoot(),
-    AppRoutingModule],
+    AppRoutingModule,
+    SpeedTestModule
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Api],
   bootstrap: [AppComponent],
 })
