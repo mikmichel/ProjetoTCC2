@@ -18,11 +18,15 @@
 # Dependencias 
 - npm i -D @types/google.maps
 - npm install rxjs-compat
+- npm install ng-speed-test --save
 ## para funcionar a geolocalização
 - npm install cordova-plugin-geolocation
 - npm install @ionic-native/geolocation
 - ionic cap sync
 # Caso de erro ao tentar executar o cap sync verificar se não falta alguma dependencia.
+
+## Site do ng-speed-teste
+- https://www.npmjs.com/package/ng-speed-test
 
 # Videos para auxiliar 
  - https://www.youtube.com/watch?v=gTl2UuJdJ7A
