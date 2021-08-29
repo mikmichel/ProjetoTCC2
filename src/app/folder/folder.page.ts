@@ -95,8 +95,8 @@ export class FolderPage implements OnInit {
         );
         this.testeRede = this.speeds;
 
-        console.log('Passei por aqui 2 ' + speed); //teste
-        console.log('Passei por aqui 3 ' + this.speeds); //reste
+        console.log('Passei por aqui (1) ' + speed); //teste
+        console.log('Passei por aqui (2) ' + this.speeds); //reste
 
       }
     );
@@ -105,6 +105,7 @@ export class FolderPage implements OnInit {
   // Salvando a posição no BD
   salvar(){
     console.log('Salvar()'); //teste
+    console.log('teste de rede '+ this.testeRede);
     return new Promise(resolve => {
       let dados = {
         latitude: this.latitude,
