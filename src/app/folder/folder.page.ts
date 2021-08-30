@@ -4,6 +4,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ToastController } from '@ionic/angular';
 import { Api } from 'src/services/api';
 import {SpeedTestService} from 'ng-speed-test';
+import { element } from 'protractor';
+
 
 
 
@@ -86,33 +88,37 @@ export class FolderPage implements OnInit {
   }
 
   //Realizando um teste de rede
-  trackSpeed() {
+  trackSpeed():void {
     this.speeds = [];
     this.speedTestService.getMbps({ retryDelay: 1500 }).subscribe(
       (speed) => {
-        this.speeds.unshift(
-          speed.toFixed(2)
-        );
-        this.testeRede = this.speeds;
+        this.speeds.unshift(speed.toFixed(2));
 
-        console.log('Passei por aqui (1) ' + speed); //teste
-        console.log('Passei por aqui (2) ' + this.speeds); //reste
+        // this.testeRede = this.speeds[0];
 
       }
     );
   }
+ 
 
   // Salvando a posição no BD
   salvar(){
-    console.log('Salvar()'); //teste
-    console.log('teste de rede '+ this.testeRede);
+    //console.log('Salvar()'); //teste
+    //console.log('teste de rede '+ this.testeRede); //teste
+   // console.log('A Latitude é 1: '+this.latitude); //teste 
+    //console.log('A longitude é 1: '+this.longitude); //teste
+   // console.log('o Teste de rede foi 1: '+this.testeRede); //teste
+   this.testeRede = this.speeds[0];
     return new Promise(resolve => {
       let dados = {
         latitude: this.latitude,
         longitude: this.longitude,
-        testeRede: this.testeRede
+        speeds: this.testeRede
       }
-       console.log('Antes de Salvar'); //teste
+     // console.log('A Latitude é 2: '+this.latitude); //teste 
+    //  console.log('A longitude é 2: '+this.longitude); //teste
+    //  console.log('o Teste de rede foi 2: '+this.testeRede); //teste
+     // console.log('Antes de Salvar'); //teste
       this.provider.dadosApi(dados, 'localizacao/inserir.php').subscribe(
         data => {
           console.log('Salvando'); //teste
@@ -120,7 +126,7 @@ export class FolderPage implements OnInit {
           this.mensagemSucesso(data['mensagem']);
         }
       );
-       console.log('Eu cheguei aqui'); //teste
+      // console.log('Eu cheguei aqui'); //teste
     });
   }
 

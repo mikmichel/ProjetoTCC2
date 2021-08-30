@@ -2,6 +2,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
+
 //arquivo utilizado apra conectar com o banco(API)
 @Injectable()
 export class Api{
