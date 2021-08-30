@@ -115,7 +115,7 @@ export class FolderPage implements OnInit {
         data => {
           console.log('Salvando'); //teste
           // console.log(data['mensagem']); //teste
-          this.mensagemSucesso(data['mensagem']);
+          this.mensagemSucesso(data['']='menagem');
         }
       );
        console.log('Eu cheguei aqui'); //teste
@@ -131,5 +131,4 @@ export class FolderPage implements OnInit {
     toast.present();
     console.log('MensagemSucesso'); //teste
   }
-
 }
