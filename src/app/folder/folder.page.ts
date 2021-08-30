@@ -22,7 +22,7 @@ export class FolderPage implements OnInit {
   testeRede: any = '';
   speeds: any = '';
 
-  @ViewChild('map', { read: ElementRef, static: false }) mapRef: ElementRef;
+  @ViewChild('map',{ read: ElementRef, static: false }) mapRef: ElementRef;
 
   constructor(
     private geolocation: Geolocation,
