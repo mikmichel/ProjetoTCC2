@@ -95,7 +95,9 @@ export class FolderPage implements OnInit {
         this.speeds.unshift(speed.toFixed(2));
 
         // this.testeRede = this.speeds[0];
-
+        //this.testeRede = this.speeds[0].toString();
+       // this.testeRede = JSON.parse.toString(this.speeds[0]);
+       this.testeRede = parseFloat(this.speeds);
       }
     );
   }
@@ -105,15 +107,15 @@ export class FolderPage implements OnInit {
   salvar(){
     //console.log('Salvar()'); //teste
     //console.log('teste de rede '+ this.testeRede); //teste
-   // console.log('A Latitude é 1: '+this.latitude); //teste 
+   // console.log('A Latitude é 1: '+this.latitude); //teste
     //console.log('A longitude é 1: '+this.longitude); //teste
    // console.log('o Teste de rede foi 1: '+this.testeRede); //teste
-   this.testeRede = this.speeds[0];
+   //this.testeRede = this.speeds[0];
     return new Promise(resolve => {
       let dados = {
         latitude: this.latitude,
         longitude: this.longitude,
-        speeds: this.testeRede
+        testeRede: this.testeRede
       }
      // console.log('A Latitude é 2: '+this.latitude); //teste 
     //  console.log('A longitude é 2: '+this.longitude); //teste

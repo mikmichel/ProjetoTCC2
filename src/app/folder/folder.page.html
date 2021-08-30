@@ -11,12 +11,12 @@
   <!-- Mapa na tela do aplicativo -->
   <div #map id="map"></div> 
 
-   <!-- Informa na tela a latitude e longitude -->
+  <!-- Informa na tela a latitude e longitude -->
   <ion-label>Latitude: <b>{{latitude}} </b></ion-label><br />
   <ion-label>Longitude: <b>{{longitude}} </b></ion-label><br />
 
-  <!-- Teste de ping -->
-  <ion-label>Teste:<b> {{speeds[0]}}</b> Mbps</ion-label><br/>
+  <!-- Teste de Rede -->
+  <ion-label>Teste:<b> {{testeRede}}</b> Mbps</ion-label><br/>
 
 
   <ion-button color="primary" expand="block" (click)="trackSpeed()">
@@ -29,5 +29,5 @@
   </ion-button>
 
 
- 
+
 </ion-content>
