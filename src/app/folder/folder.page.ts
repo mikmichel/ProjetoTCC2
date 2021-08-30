@@ -4,7 +4,6 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ToastController } from '@ionic/angular';
 import { Api } from 'src/services/api';
 import {SpeedTestService} from 'ng-speed-test';
-import { element } from 'protractor';
 
 
 
@@ -14,13 +13,14 @@ import { element } from 'protractor';
   templateUrl: './folder.page.html',
   styleUrls: ['./folder.page.scss'],
 })
+
 export class FolderPage implements OnInit {
   map: google.maps.Map;
   minhaPosicao: google.maps.LatLng;
-  latitude: any = "";
-  longitude: any = "";
-  testeRede: any = ""; 
-  speeds: any="";
+  latitude: any = '';
+  longitude: any = '';
+  testeRede: any = '';
+  speeds: any = '';
 
   @ViewChild('map', { read: ElementRef, static: false }) mapRef: ElementRef;
 
@@ -33,8 +33,7 @@ export class FolderPage implements OnInit {
     ) { }
 
   ngOnInit() {
-      this.actRuter.params.subscribe((data:any) =>{
-
+      this.actRuter.params.subscribe((data: any) =>{
       });
   }
   ionViewWillEnter() {
@@ -49,17 +48,18 @@ export class FolderPage implements OnInit {
       center: posicao,
       zoom: 8,
       disableDefaultUI: true
-
     };
-    //console.log('ExibirMapa');
+
     this.map = new google.maps.Map(this.mapRef.nativeElement, opcao);
 
     this.buscarPosicao();
+    console.log('ExibirMapa'); //teste
   }
 
   // Obtendo Geolocalização no mapa
   buscarPosicao(){
     this.geolocation.getCurrentPosition().then((resp) => {
+
       this.latitude = resp.coords.latitude;
       this.longitude = resp.coords.longitude;
 
@@ -70,7 +70,7 @@ export class FolderPage implements OnInit {
     }).catch((error) => {
       console.log('Error getting location', error);
     });
-    //console.log('BuscarPosicao');
+      console.log('BuscarPosicao'); //teste
   }
 
   // Mostrando a localização no mapa
@@ -84,51 +84,41 @@ export class FolderPage implements OnInit {
       animation: google.maps.Animation.BOUNCE,
       map: this.map
     });
-   // console.log('IrParaMinhaPosicao');
+      console.log('IrParaMinhaPosicao'); //teste
   }
 
   //Realizando um teste de rede
-  trackSpeed():void {
+  trackSpeed(){
     this.speeds = [];
     this.speedTestService.getMbps({ retryDelay: 1500 }).subscribe(
       (speed) => {
         this.speeds.unshift(speed.toFixed(2));
-
-        // this.testeRede = this.speeds[0];
-        //this.testeRede = this.speeds[0].toString();
-       // this.testeRede = JSON.parse.toString(this.speeds[0]);
-       this.testeRede = parseFloat(this.speeds);
+        this.testeRede = parseFloat(this.speeds);
+        console.log('TesteRede'); //teste
       }
     );
   }
- 
+
 
   // Salvando a posição no BD
   salvar(){
-    //console.log('Salvar()'); //teste
-    //console.log('teste de rede '+ this.testeRede); //teste
-   // console.log('A Latitude é 1: '+this.latitude); //teste
-    //console.log('A longitude é 1: '+this.longitude); //teste
-   // console.log('o Teste de rede foi 1: '+this.testeRede); //teste
-   //this.testeRede = this.speeds[0];
+    console.log('Salvar()'); //teste
     return new Promise(resolve => {
-      let dados = {
+      const dados = {
         latitude: this.latitude,
         longitude: this.longitude,
         testeRede: this.testeRede
-      }
-     // console.log('A Latitude é 2: '+this.latitude); //teste 
-    //  console.log('A longitude é 2: '+this.longitude); //teste
-    //  console.log('o Teste de rede foi 2: '+this.testeRede); //teste
-     // console.log('Antes de Salvar'); //teste
+      };
+
+      console.log('Antes de Salvar'); //teste
       this.provider.dadosApi(dados, 'localizacao/inserir.php').subscribe(
         data => {
           console.log('Salvando'); //teste
-           console.log(data['mensagem']); //teste
+          // console.log(data['mensagem']); //teste
           this.mensagemSucesso(data['mensagem']);
         }
       );
-      // console.log('Eu cheguei aqui'); //teste
+       console.log('Eu cheguei aqui'); //teste
     });
   }
 
@@ -139,6 +129,7 @@ export class FolderPage implements OnInit {
       duration: 2000
     });
     toast.present();
+    console.log('MensagemSucesso'); //teste
   }
 
 }
