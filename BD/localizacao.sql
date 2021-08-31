@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 31-Ago-2021 às 15:24
+-- Tempo de geração: 31-Ago-2021 às 15:55
 -- Versão do servidor: 10.4.20-MariaDB
 -- versão do PHP: 8.0.8
 
@@ -31,7 +31,8 @@ CREATE TABLE `localizacao` (
   `id` int(11) NOT NULL,
   `latitude` float(10,6) NOT NULL,
   `longitude` float(10,6) NOT NULL,
-  `teste` float NOT NULL
+  `teste` float NOT NULL,
+  `timestemp` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
