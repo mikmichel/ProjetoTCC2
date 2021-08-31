@@ -7,13 +7,19 @@
 	$longitude = $postjson['longitude'];
 	$testeRede = $postjson['testeRede'];
 
-	$res = $pdo->prepare("INSERT INTO localizacao SET latitude = :latitude, longitude = :longitude, testeRede = :testeRede");
-
+	$res = $pdo->prepare("INSERT INTO localizacao SET latitude = :latitude, longitude = :longitude, teste = :testeRede");
+	
 //salvaldo a localização no banco.
 	$res->bindValue(":latitude", $latitude);
 	$res->bindValue(":longitude", $longitude);
 	$res->bindValue(":testeRede", $testeRede);
 	$res->execute();
+
+	if($testeRede == ""){
+		$result = json_encode(array('mensagem' => 'Aguarde um instante enquanto o teste é realizado'));
+		echo $result;
+		exit();
+	}
 
 	$result = json_encode(array('mensagem' => 'Salvo com Sucesso', 'ok' => true));
 	echo $result;

@@ -13,7 +13,8 @@
             $dados[] = array(
                 'id' => $res[$i]['id'],
                 'latitude' => $res[$i]['latitude'],
-                'longitude' => $res[$i]['longitude'],                
+                'longitude' => $res[$i]['longitude'],
+                'testeRede' => $res[$i]['testeRede'],                
             );
             
         }
