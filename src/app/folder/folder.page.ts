@@ -53,7 +53,7 @@ export class FolderPage implements OnInit {
     this.map = new google.maps.Map(this.mapRef.nativeElement, opcao);
 
     this.buscarPosicao();
-    console.log('ExibirMapa'); //teste
+    //console.log('ExibirMapa'); //teste
   }
 
   // Obtendo Geolocalização no mapa
@@ -70,7 +70,7 @@ export class FolderPage implements OnInit {
     }).catch((error) => {
       console.log('Error getting location', error);
     });
-      console.log('BuscarPosicao'); //teste
+     // console.log('BuscarPosicao'); //teste
   }
 
   // Mostrando a localização no mapa
@@ -84,7 +84,7 @@ export class FolderPage implements OnInit {
       animation: google.maps.Animation.BOUNCE,
       map: this.map
     });
-      console.log('IrParaMinhaPosicao'); //teste
+      //console.log('IrParaMinhaPosicao'); //teste
   }
 
   //Realizando um teste de rede
@@ -94,7 +94,7 @@ export class FolderPage implements OnInit {
       (speed) => {
         this.speeds.unshift(speed.toFixed(2));
         this.testeRede = parseFloat(this.speeds);
-        console.log('TesteRede'); //teste
+        //console.log('TesteRede'); //teste
       }
     );
   }
@@ -102,7 +102,7 @@ export class FolderPage implements OnInit {
 
   // Salvando a posição no BD
   salvar(){
-    console.log('Salvar()'); //teste
+    //console.log('Salvar()'); //teste
     return new Promise(resolve => {
       const dados = {
         latitude: this.latitude,
@@ -110,25 +110,31 @@ export class FolderPage implements OnInit {
         testeRede: this.testeRede
       };
 
-      console.log('Antes de Salvar'); //teste
+     // console.log('Antes de Salvar'); //teste
       this.provider.dadosApi(dados, 'localizacao/inserir.php').subscribe(
         data => {
-          console.log('Salvando'); //teste
-          // console.log(data['mensagem']); //teste
-          this.mensagemSucesso(data['']='menagem');
+          //console.log('Salvando'); //teste
+          //console.log(data['mensagem']); //teste
+          if(data['ok']==true){
+            this.mensagem(data['mensagem'], 'success');
+          }else{
+            this.mensagem(data['mensagem'], 'danger');
+
+          }
         }
       );
-       console.log('Eu cheguei aqui'); //teste
+       //console.log('Eu cheguei aqui'); //teste
     });
   }
 
   // Apresentando uma mensagem de sucesso ao salvar no banco
-  async mensagemSucesso(mensagem){
+  async mensagem(mensagem, cor){
     const toast = await this.toastCtrl.create({
       message: mensagem,
-      duration: 2000
+      duration: 2000,
+      color: cor
     });
     toast.present();
-    console.log('MensagemSucesso'); //teste
+    //console.log('MensagemSucesso'); //teste
   }
 }
