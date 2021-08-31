@@ -9,19 +9,23 @@
 
 	$res = $pdo->prepare("INSERT INTO localizacao SET latitude = :latitude, longitude = :longitude, teste = :testeRede");
 	
-//salvaldo a localização no banco.
-	$res->bindValue(":latitude", $latitude);
-	$res->bindValue(":longitude", $longitude);
-	$res->bindValue(":testeRede", $testeRede);
-	$res->execute();
+
 
 	if($testeRede == ""){
-		$result = json_encode(array('mensagem' => 'Aguarde um instante enquanto o teste é realizado'));
-		echo $result;
+		echo json_encode(array('mensagem' => 'Aguarde um instante, por favor, enquanto o teste é realizado'));
 		exit();
+	}else{
+
+		//salvaldo a localização no banco.
+		$res->bindValue(":latitude", $latitude);
+		$res->bindValue(":longitude", $longitude);
+		$res->bindValue(":testeRede", $testeRede);
+		$res->execute();
+
+		$result = json_encode(array('mensagem' => 'Salvo com Sucesso', 'ok' => true));
+		echo $result;
 	}
 
-	$result = json_encode(array('mensagem' => 'Salvo com Sucesso', 'ok' => true));
-	echo $result;
+	
 
 ?>
